@@ -40,8 +40,8 @@ void escogerLed(void);
 //****************************************************************
 int contadorLeds = 0;
 int intensidad = 0;
-int presionado = 0;//antirrebote1, tengo que ver la clase donde Pablo lo hace de otra forma jeje
-int presionado2 = 0;//antirrebote 2
+int presionado;//antirrebote1, tengo que ver la clase donde Pablo lo hace de otra forma jeje
+int presionado2;//antirrebote 2
 int contB4 = 0;
 
 
@@ -57,6 +57,7 @@ int contB4 = 0;
 // Configuración
 //****************************************************************
 void setup() {
+  Serial.begin(115200);
   configurarPWM();
 
   //pinMode(LedR, OUTPUT);//esto no es necesario al parecer
@@ -111,19 +112,22 @@ boton 3. El segundo if evita que el contador escoja una
 opcion mayor a las unicas que existen */
 void boton3(){
 
-  if (digitalRead(B3)==0){
-    presionado = 1;
-  }
-  if (digitalRead(B3) == 1 && presionado == 1){
-    contadorLeds = contadorLeds + 1;
+  if (digitalRead(B3)==0 && presionado ==1){
     presionado = 0;
     delay(150);
+    contadorLeds = contadorLeds + 1;
+    
+  }
+
+  if (digitalRead(B3) == 1 && presionado == 0){
+    presionado = 1;
+    delay(10);
   }
 
   if (contadorLeds == 3 ){
     contadorLeds = 0 ;
   }
-  
+  Serial.print(contadorLeds);
 }
 
 //****************************************************************
@@ -142,62 +146,63 @@ void escogerLed(){
   if (contadorLeds == 0){
     //varia la intensidad del led rojo cuando el contador lo selecciona
     int a = 0;
-    if (digitalRead(B4)==0){
-      presionado2 = 1;
-    }
-    if (digitalRead(B4) == 1 && presionado2 == 1){
-      a = a + 51;
-      presionado = 0;
+    if (digitalRead(B4)==0 && presionado2 == 1){
+      presionado2 = 0;
       delay(150);
+      a = a + 51;
+    }
+    if (digitalRead(B4) == 1 && presionado2 == 0){
+      presionado = 1;
+      delay(10);
     }
 
     if (a > 255){
       a = 0;
     }
-
+    Serial.print(a);
     ledcWrite(pwmChannel, a);
 
 
   }
   if(contadorLeds == 1){
     //varia la intensidad del led verde cuando el contador lo selecciona
-    int a = 0;
-    if (digitalRead(B4)==0){
-      presionado2 = 1;
-    }
-    if (digitalRead(B4) == 1 && presionado2 == 1){
-      a = a + 51;
-      presionado = 0;
+    int b = 0;
+    if (digitalRead(B4)==0 && presionado2 == 1){
+      presionado2 = 0;
       delay(150);
+      b = b + 51;
+    }
+    if (digitalRead(B4) == 1 && presionado2 == 0){
+      presionado = 1;
+      delay(10);
     }
 
-    if (a > 255){
-      a = 0;
+    if (b > 255){
+      b = 0;
     }
-
-    ledcWrite(pwmChannel2, a);
+    Serial.print(b);
+    ledcWrite(pwmChannel, b);
 
   }
 
   if(contadorLeds == 2){
     //varia la intensidad del led azul cuando el contador lo selecciona
     int a = 0;
-    if (digitalRead(B4)==0){
-      presionado2 = 1;
-    }
-    if (digitalRead(B4) == 1 && presionado2 == 1){
-      a = a + 51;
-      presionado = 0;
+    if (digitalRead(B4)==0 && presionado2 == 1){
+      presionado2 = 0;
       delay(150);
+      a = a + 51;
+    }
+    if (digitalRead(B4) == 1 && presionado2 == 0){
+      presionado = 1;
+      delay(10);
     }
 
     if (a > 255){
       a = 0;
     }
-
-    ledcWrite(pwmChannel3, a);
-
-
+    Serial.print(a);
+    ledcWrite(pwmChannel, a);
 
   }
 }
