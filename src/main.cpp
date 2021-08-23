@@ -13,19 +13,19 @@
 // Definición de etiquetas
 //****************************************************************
 // Paso 1: selección de parámetros de la señal PWM
-#define pwmChannel 0 // 16 canales 0-15
-#define pwmChannel2 2
-#define pwmChannel3 1
+#define pwmChannel 5 // 16 canales 0-15
+#define pwmChannel2 6
+#define pwmChannel3 7
 #define freqPWM 5000  // Frecuencia en Hz
 #define resolution 8  // 1-16 bits de resolución 
-#define LedR 23        // GPIOs para tener la salida del PWM
-#define LedG 22
-#define LedB 21    
+#define LedR 0        // GPIOs para tener la salida del PWM
+#define LedG 2
+#define LedB 15    
 
-#define B1  12
-#define B2  14
-#define B3  27
-#define B4  26
+#define B1  4
+#define B2  16
+#define B3  17
+#define B4  5
 //****************************************************************
 // Prototipos de funciones
 //****************************************************************
