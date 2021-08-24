@@ -40,8 +40,8 @@ void escogerLed(void);
 //****************************************************************
 int contadorLeds = 0;
 int intensidad = 0;
-int presionado;//antirrebote1, tengo que ver la clase donde Pablo lo hace de otra forma jeje
-int presionado2;//antirrebote 2
+int presionado = 1;//antirrebote1, tengo que ver la clase donde Pablo lo hace de otra forma jeje
+int presionado2 = 1;//antirrebote 2
 int contB4 = 0;
 
 
